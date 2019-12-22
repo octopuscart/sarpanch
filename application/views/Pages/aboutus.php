@@ -1,18 +1,18 @@
 <?php
 $this->load->view('layout/header');
 $aboutimages = array(
-    "1"=>"Building our branches",
-    "2"=>"Innaugrations of STS Branches",
-    "3"=>"Team behind the success of STS so far!",
-    "4"=>"Professional acknowledgment",
-    "5"=>"Social presence on behalf of STS",
-    );
+    "1" => "Building our branches",
+    "2" => "Innaugrations of STS Branches",
+    "3" => "Team behind the success of STS so far!",
+    "4" => "Professional acknowledgment",
+    "5" => "Social presence on behalf of STS",
+);
 ?>
 <style>
     .galleryimage{margin: 5px;}
     .imgcaption{
         font-size: 17px;
-    text-align: center;
+        text-align: center;
     }
 </style>
 <!--contannt section-->
@@ -33,15 +33,24 @@ $aboutimages = array(
                         She set-up the first branch at Patparganj which did not serve her ambitions to the core of it so as a young entrepreneur she decided to enhance her services by providing the pick and drop facilities to her clients. She later realised that this was not the zenith of her ambition so she decided to get ahead of it and established a new branch in Madhu Vihar but this still did not satiate her. She also wanted her clients to be pampered properly when they get ready for their wedding. She would want them to lavishly sit in the car parked right at the door of salon which wasn’t possible at Madhu Vihar so she further spread her wings to engender a branch at Mayur Vihar which could serve the purpose.                    </p>
 
 
+
                     <div class="row">
-
-                        <?php
-                        foreach ($aboutimages as $key => $value) {
-                          
-
-                            echo " <div class='col-md-6'><img src='" . base_url() . 'assets/images/about/' . $key . ".jpeg' class='galleryimage'/><h2 class='imgcaption'>".$value."</h2> </div>";
-                        }
-                        ?>
+                        <div class='col-md-6'>
+                            <?php
+                            foreach ($aboutimages as $key => $value) {
+                                if ($key % 2 != 0)
+                                    echo "<div class='imgcontainer'> <img src='" . base_url() . 'assets/images/about/' . $key . ".jpeg' class='galleryimage'/><h2 class='imgcaption'>" . $value . "</h2></div>";
+                            }
+                            ?>
+                        </div>
+                        <div class='col-md-6'>
+                            <?php
+                            foreach ($aboutimages as $key => $value) {
+                                if ($key % 2 == 0)
+                                    echo " <div class='imgcontainer'> <img src='" . base_url() . 'assets/images/about/' . $key . ".jpeg' class='galleryimage'/><h2 class='imgcaption'>" . $value . "</h2> </div>";
+                            }
+                            ?>
+                        </div>
 
                     </div>
 
