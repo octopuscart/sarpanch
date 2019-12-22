@@ -5,7 +5,7 @@ $images = array(
     "2"=>"Walk a talk about beauty and make up by TG at STS",
     "3"=>"Inspiring the Aspiring Entrepreneurs",
     "4"=>"Live make up session By TG organised by STS",
-    "5"=>"This one I don’t have a tag line",
+    "5"=>"",
     );
 ?>
 <style>
@@ -48,7 +48,7 @@ $images = array(
                         foreach ($images as $key => $value) {
                           
 
-                            echo " <div class='col-md-6'><img src='" . base_url() . 'assets/images/about/' . $key . ".jpeg' class='galleryimage'/><h2 class='imgcaption'>".$value."</h2> </div>";
+                            echo " <div class='col-md-6'><img src='" . base_url() . 'assets/images/acadmic/' . $key . ".jpeg' class='galleryimage'/><h2 class='imgcaption'>".$value."</h2> </div>";
                         }
                         ?>
 
