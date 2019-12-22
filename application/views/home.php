@@ -54,7 +54,7 @@ Hey there! We know the hassle of getting ready for events is too much, so when y
                 </div>
 
                 <div _ngcontent-c9="" class="wyYMDMOptn">
-                    <div _ngcontent-c9="" class="wyYMDMOptnImg"><img _ngcontent-c9="" alt="" src="<?php echo base_url(); ?>assets/highlight/HomeVisit.jpg"></div>
+                    <div _ngcontent-c9="" class="wyYMDMOptnImg"><img _ngcontent-c9="" alt="" src="<?php echo base_url(); ?>assets/highlight/HomeVisit2.jpg"></div>
                     <div _ngcontent-c9="" class="wyYMDMOptnTxt">
                         <h2 _ngcontent-c9="" class="wyYMDMHdng">Home Visits</h2>
                         <p _ngcontent-c9=""> 

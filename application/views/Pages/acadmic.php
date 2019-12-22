@@ -1,7 +1,20 @@
 <?php
 $this->load->view('layout/header');
+$images = array(
+    "1"=>"Make up classes by TG at STS",
+    "2"=>"Walk a talk about beauty and make up by TG at STS",
+    "3"=>"Inspiring the Aspiring Entrepreneurs",
+    "4"=>"Live make up session By TG organised by STS",
+    "5"=>"This one I don’t have a tag line",
+    );
 ?>
-
+<style>
+    .galleryimage{margin: 5px;}
+    .imgcaption{
+        font-size: 17px;
+    text-align: center;
+    }
+</style>
 <!--contannt section-->
 <app-about-us _nghost-c14="" class="ng-star-inserted">
     <div _ngcontent-c14="">
@@ -29,6 +42,17 @@ $this->load->view('layout/header');
                     <p _ngcontent-c14=""> 
                         We also provide a special category of courses for the aspiring entrepreneurs looking forward to establish their own set-up in the field of beauty from the scratch. We serve with specially curated courses with duly registered certificates from the academy.
                     </p>
+                    <div class="row">
+
+                        <?php
+                        foreach ($images as $key => $value) {
+                          
+
+                            echo " <div class='col-md-6'><img src='" . base_url() . 'assets/images/about/' . $key . ".jpeg' class='galleryimage'/><h2 class='imgcaption'>".$value."</h2> </div>";
+                        }
+                        ?>
+
+                    </div>
                 </div>
             </div>
         </section>
