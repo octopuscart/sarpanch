@@ -215,7 +215,7 @@ $this->load->view('layout/header');
         </div>
     </section>
     <app-media-converage _ngcontent-c6="" _nghost-c13="">
-        <section _ngcontent-c13="" class="mediaCvrgSec hidden_mobile">
+        <section _ngcontent-c13="" class="mediaCvrgSec ">
             <div _ngcontent-c13="" class="container">
                 <div _ngcontent-c13="" class="secHdngCnt">
                     <h1 _ngcontent-c13="">Our Partners</h1></div>
