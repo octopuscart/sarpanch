@@ -32,7 +32,7 @@ $this->load->view('layout/header');
                     <div _ngcontent-c9="" class="wyYMDMOptnTxt">
                         <h2 _ngcontent-c9="" class="wyYMDMHdng">In-House Studio </h2>
                         <p _ngcontent-c9=""> 
-We bolster seasoned and premiere hair, skin and beauty professionals treating with authentic products and services. Our team is trained and supervised by the professional make up artist Tripti Garg (founder of Style Treat Studio) Certified by Ashmeen Munjaal’s makeup academy.</p>
+                            We bolster seasoned and premiere hair, skin and beauty professionals treating with authentic products and services. Our team is trained and supervised by the professional make up artist Tripti Garg (founder of Style Treat Studio) Certified by Ashmeen Munjaal’s makeup academy.</p>
                     </div>
                 </div>
                 <div _ngcontent-c9="" class="wyYMDMOptn rightImg">
@@ -40,7 +40,7 @@ We bolster seasoned and premiere hair, skin and beauty professionals treating wi
                     <div _ngcontent-c9="" class="wyYMDMOptnTxt">
                         <h2 _ngcontent-c9="" class="wyYMDMHdng">Venue make up</h2>
                         <p _ngcontent-c9=""> 
-Hey there! We know the hassle of getting ready for events is too much, so when you can’t visit the salon we bring the salon to you. The team is fully equipped and has trained professionals to ease your hassle. Also customer satisfaction has always been our priority. All you need to do is dial us or book an appointment by a click, we’ll be at your service.                    </div>
+                            Hey there! We know the hassle of getting ready for events is too much, so when you can’t visit the salon we bring the salon to you. The team is fully equipped and has trained professionals to ease your hassle. Also customer satisfaction has always been our priority. All you need to do is dial us or book an appointment by a click, we’ll be at your service.                    </div>
                 </div>
 
 
@@ -58,7 +58,7 @@ Hey there! We know the hassle of getting ready for events is too much, so when y
                     <div _ngcontent-c9="" class="wyYMDMOptnTxt">
                         <h2 _ngcontent-c9="" class="wyYMDMHdng">Home Visits</h2>
                         <p _ngcontent-c9=""> 
-This is for all the ladies who balances life, work and families all together. We understand and value the time you give to pamper others but forget to take care of yourselves, worry not we’re here all set to pamper you at your door step, just a click/call away.                    </div>
+                            This is for all the ladies who balances life, work and families all together. We understand and value the time you give to pamper others but forget to take care of yourselves, worry not we’re here all set to pamper you at your door step, just a click/call away.                    </div>
                 </div>
 
 
@@ -92,7 +92,6 @@ This is for all the ladies who balances life, work and families all together. We
                             <div class="owl-stage max_width" style="">
 
                                 <?php
-                                
                                 foreach ($reviewItem as $key => $value) {
                                     ?>
 
@@ -105,15 +104,15 @@ This is for all the ladies who balances life, work and families all together. We
                                             </div>
                                             <div _ngcontent-c11="" class="rvwTxt" style="    height: 100%;">
                                                 <p _ngcontent-c11="" style="      font-size: 19px;">
-    <?php echo $value['review']; ?>
+                                                    <?php echo $value['review']; ?>
                                                 </p>
                                             </div>
 
                                         </div>
                                     </div>
-    <?php
-}
-?>
+                                    <?php
+                                }
+                                ?>
                             </div>
                         </div>
 
@@ -205,7 +204,7 @@ This is for all the ladies who balances life, work and families all together. We
                 <div _ngcontent-c6="" class="ourFtrOpt">
                     <h2 _ngcontent-c6="">Appointments </h2>
                     <p _ngcontent-c6=""> 
-The STS Website/App allows clients to easily book and manage appointments with just few clicks . The procedure is hassle-free as easy as ordering your food online through the app.                     </p>
+                        The STS Website/App allows clients to easily book and manage appointments with just few clicks . The procedure is hassle-free as easy as ordering your food online through the app.                     </p>
                 </div>
                 <div _ngcontent-c6="" class="ourFtrOpt">
                     <h2 _ngcontent-c6="">100% Transparency </h2>
@@ -234,9 +233,13 @@ The STS Website/App allows clients to easily book and manage appointments with j
                         <li _ngcontent-c13="">
                             <a _ngcontent-c13="" href="https://www.haritikajewellery.com" target="_blank"><img _ngcontent-c13="" alt="" src="<?php echo base_url(); ?>assets/brand/haritikajewellery.jpeg"></a>
                         </li>
-                        
+
                         <li _ngcontent-c13="">
                             <a _ngcontent-c13="" href="https://www.theprintadda.in/" target="_blank"><img _ngcontent-c13="" alt="" src="<?php echo base_url(); ?>assets/brand/the_print_adda.jpg"></a>
+                        </li>
+
+                        <li _ngcontent-c13="">
+                            <a _ngcontent-c13="" href="https://www.youtube.com/channel/UCP91hZ-47ITL13fwo6AURag" target="_blank"><img _ngcontent-c13="" alt="" src="<?php echo base_url(); ?>assets/brand/mec.jpeg"></a>
                         </li>
 
                     </ul>
