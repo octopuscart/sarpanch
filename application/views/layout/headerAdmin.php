@@ -35,7 +35,7 @@
 
             <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
                 <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#" style="    text-align: center;">
-                    <img  alt="" src="<?php echo base_url(); ?>assets/images/logo.png" style="height: 30px;">
+                    अखिल भारतीय सरपंच महासंघ राष्ट्रीय
                 </a>
                 <ul class="navbar-nav px-3">
                     <li class="nav-item text-nowrap">
@@ -53,50 +53,85 @@
 
             <div class="container-fluid">
                 <div class="row">
-                    <?php
-                    if ($session_data) {
-                        ?>
-                        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                            <div class="sidebar-sticky">
-                                <ul class="nav flex-column">
-                                  
+
+                    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                        <div class="sidebar-sticky">
+                            <ul class="nav flex-column">
+                                <li style="text-align: center">
+                                    <img  alt="" src="<?php echo base_url(); ?>assets/images/logo.png" style="height: 100px;">
+                                </li>
+                                <div class="dropdown-divider"></div>
+
+                                <?php
+                                if ($session_data) {
+                                    ?>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url("Admin/bookingReport") ?>">
-                                            <i class="fa fa-list-ol"></i>
-                                            Booking Reports
+                                        <a class="nav-link" href="<?php echo site_url("Admin/addmembers") ?>">
+                                            <i class="fa fa-arrow-right"></i>
+                                            सदस्य जोड़ें 
                                         </a>
                                     </li>
-                                  
-                                   
+
+
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url("Admin/customers"); ?>">
-                                            <i class="fa fa-user"></i>
-                                            Customers
+                                        <a class="nav-link" href="<?php echo site_url("Admin/positions"); ?>">
+                                            <i class="fa fa-arrow-right"></i>
+                                            सदस्यता पदों की लिस्ट
                                         </a>
                                     </li>
+
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url("Admin/sliderImages"); ?>">
-                                            <i class="fa fa-picture-o"></i>
-                                            Slider Images
+                                        <a class="nav-link" href="<?php echo site_url("Admin/positionsCategory"); ?>">
+                                            <i class="fa fa-arrow-right"></i>
+                                            संगठन वर्गीकरण
                                         </a>
                                     </li>
-                                    
+
+                                    <div class="dropdown-divider"></div>
+
+                                    <?php
+                                }
+                                ?>
+
+                                <?php
+                                $query = $this->db->get('category');
+                                $categorylist = $query->result_array();
+                                foreach ($categorylist as $key => $value) {
+                                    ?>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="<?php echo site_url("Admin/gallaryImages"); ?>">
-                                            <i class="fa fa-pinterest-p"></i>
-                                            Gallery Images
+                                        <a class="nav-link" href="<?php echo site_url("Admin/members/" . $value['id']); ?>">
+                                            <i class="fa fa-arrow-right"></i>
+                                            <?php echo $value['category_name'] ?>  लिस्ट
                                         </a>
                                     </li>
-                                    
-                                    
+                                    <?php
+                                }
+                                ?>
 
 
-                                </ul>
 
 
-                            </div>
-                        </nav>
-                        <?php
-                    }
-                    ?>
+                                <!--                                    <li class="nav-item">
+                                                                        <a class="nav-link" href="<?php echo site_url("Admin/sliderImages"); ?>">
+                                                                            <i class="fa fa-picture-o"></i>
+                                                                            Slider Images
+                                                                        </a>
+                                                                    </li>
+                                
+                                                                    <li class="nav-item">
+                                                                        <a class="nav-link" href="<?php echo site_url("Admin/gallaryImages"); ?>">
+                                                                            <i class="fa fa-pinterest-p"></i>
+                                                                            Gallery Images
+                                                                        </a>
+                                                                    </li>-->
+
+
+
+
+                            </ul>
+
+
+                        </div>
+                    </nav>
+
                     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">

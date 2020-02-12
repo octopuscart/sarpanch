@@ -1,4 +1,5 @@
 <?php
+require('configuration_db.php');
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
@@ -82,9 +83,9 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'bookbnev_padaiv',
-	'password' => 'G7}=DZyZH5@Z',
-	'database' => 'bookbnev_styletreat',
+	'username' => $activedbusername,
+	'password' => $activedbpassword,
+	'database' => $activedb,
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

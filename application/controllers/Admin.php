@@ -21,69 +21,16 @@ class Admin extends CI_Controller {
 
     public function index() {
         if ($this->user_id) {
-            redirect('Account/profile');
+            redirect('Admin/members/5');
         }
+        redirect('Admin/login');
     }
 
-    //Profile page
-    public function profile2() {
-
-        $query = $this->db->get('country');
-        $countrylist = $query->result();
-        $data1['countrylist'] = $countrylist;
-
-        if ($this->user_id == 0) {
-            redirect('Account/login');
-        }
-
-        $user_details = $this->User_model->user_details($this->user_id);
-        $data['user_details'] = $user_details;
-        $data['msg'] = "";
-        if (isset($_POST['change_password'])) {
-            $old_password = $this->input->post('old_password');
-            $new_password = $this->input->post('new_password');
-            $re_password = $this->input->post('re_password');
-
-            if ($user_details->password == md5($old_password)) {
-                if ($new_password == $re_password) {
-                    $password = md5($re_password);
-                    $this->db->set('password', $password);
-                    $this->db->where('id', $this->user_id);
-                    $this->db->update('admin_users');
-                    redirect('Account/profile');
-                } else {
-                    $data['msg'] = "Password didn't match.";
-                }
-            } else {
-                $data['msg'] = 'Enterd wrong password.';
-            }
-        }
-
-
-        if (isset($_POST['update_profile'])) {
-            $this->db->set('first_name', $this->input->post('first_name'));
-            $this->db->set('last_name', $this->input->post('last_name'));
-            $this->db->set('contact_no', $this->input->post('contact_no'));
-            $this->db->set('gender', $this->input->post('gender'));
-            $this->db->set('birth_date', $this->input->post('birth_date'));
-
-            $this->db->where('id', $this->user_id);
-            $this->db->update('admin_users');
-
-            $session_user = $this->session->userdata('logged_in');
-            $session_user['first_name'] = $this->input->post('first_name');
-            $session_user['last_name'] = $this->input->post('last_name');
-            $this->session->set_userdata('logged_in', $session_user);
-
-            redirect('Account/profile');
-        }
-        $this->load->view('Account/profile', $data);
-    }
-
-    //login page
     //login page
     function login() {
-
+        if ($this->user_id) {
+            redirect('Admin/members/5');
+        }
         $data1['msg'] = "";
         $data1['countrylist'] = [];
 
@@ -130,7 +77,7 @@ class Admin extends CI_Controller {
                     $this->session->set_userdata('logged_in', $sess_data);
 
 
-                    redirect('Admin/bookingReport ');
+                    redirect('Admin/members/5');
                 } else {
                     $data1['msg'] = 'Invalid Email Or Password, Please Try Again';
                 }
@@ -140,76 +87,6 @@ class Admin extends CI_Controller {
             }
         }
 
-        if (isset($_POST['registration'])) {
-
-            $email = $this->input->post('email');
-            $password = $this->input->post('password');
-            $first_name = $this->input->post('first_name');
-            $last_name = $this->input->post('last_name');
-            $cpassword = $this->input->post('con_password');
-
-            $birth_date = $this->input->post('birth_date');
-            $gender = $this->input->post('gender');
-            $country = $this->input->post('country');
-            $profession = $this->input->post('profession');
-
-            if ($cpassword == $password) {
-                $user_check = $this->User_model->check_user($email);
-                if ($user_check) {
-                    $data1['msg'] = 'Email Address Already Registered.';
-                } else {
-                    $userarray = array(
-                        'first_name' => $first_name,
-                        'last_name' => $last_name,
-                        'email' => $email,
-                        'password' => md5($password),
-                        'password2' => $password,
-                        'profession' => $profession,
-                        'country' => $country,
-                        'gender' => $gender,
-                        'birth_date' => $birth_date,
-                        'registration_datetime' => date("Y-m-d h:i:s A")
-                    );
-                    $this->db->insert('admin_users', $userarray);
-                    $user_id = $this->db->insert_id();
-
-                    $sess_data = array(
-                        'username' => $email,
-                        'first_name' => $first_name,
-                        'last_name' => $last_name,
-                        'login_id' => $user_id,
-                    );
-
-                    $orderlog = array(
-                        'log_type' => "Registration",
-                        'log_datetime' => date('Y-m-d H:i:s'),
-                        'user_id' => $user_id,
-                        'order_id' => "",
-                        'log_detail' => "$first_name $last_name Login Succesful",
-                    );
-                    $this->db->insert('system_log', $orderlog);
-
-
-                    try {
-                        $this->User_model->registration_mail($user_id);
-                    } catch (Exception $e) {
-                        
-                    }
-
-                    $this->Product_model->cartOperationCustomCopy($user_id);
-
-                    $this->session->set_userdata('logged_in', $sess_data);
-
-                    if ($link == 'checkoutInit') {
-                        redirect('Cart/checkoutInit');
-                    }
-
-                    redirect('Account/profile');
-                }
-            } else {
-                $data1['msg'] = 'Password did not match.';
-            }
-        }
 
 
         $this->load->view('Admin/login', $data1);
@@ -240,98 +117,80 @@ class Admin extends CI_Controller {
         redirect('Account/login');
     }
 
-    //orders list
-    function dashboard() {
-        if ($this->user_id == 0) {
-            redirect('Admin/login');
+    function error_404() {
+        echo "Error 404 Page Not Found<br/><a href=" . site_url("Admin") . ">Back</a>";
+    }
+
+    function members($category_id) {
+
+        $this->db->where('id', $category_id);
+        $query = $this->db->get('category');
+        $categoryobj = $query->row();
+        $data['title'] = $categoryobj->category_name;
+        $queryst = "SELECT mb.*, ct.category_name as category, cp.position_name as position FROM `members` as mb
+  left join category as ct on ct.id = mb.category_id
+  left join category_position as cp on cp.id = mb.position_id where mb.category_id = $category_id";
+        $query = $this->db->query($queryst);
+        $memberslist = $query->result_array();
+        $data['memberslist'] = $memberslist;
+        $this->load->view('Admin/members', $data);
+    }
+
+    function addmembers() {
+        if ($this->user_id==0) {
+            redirect('Admin/members/5');
         }
-
-        $this->db->order_by('id desc');
-        $query = $this->db->get('web_order');
-        $bookinglist = $query->result();
-
+     
         $data = [];
-        $data['bookinglist'] = $bookinglist;
-        $this->load->view('Admin/dashboard', $data);
-    }
+        $this->db->order_by('display_index');
+        $query = $this->db->get('configuration_state');
+        $statelist = $query->result_array();
+        $data['statlist'] = $statelist;
 
-    function bookingDelete($id) {
-        $this->db->where('id', $id); //set column_name and value in which row need to update
-        $this->db->delete("web_order");
-        redirect("Admin/bookingReport");
-    }
+        $this->db->order_by('display_index');
+        $query = $this->db->get('category_position');
+        $positionlist = $query->result_array();
+        $data['positionlist'] = $positionlist;
 
-    //orders list
-    function bookingReport() {
-        if ($this->user_id == 0) {
-            redirect('Admin/login');
-        }
 
-        $this->db->order_by('id desc');
-        $query = $this->db->get('web_order');
-        $bookinglist = $query->result();
-
-        $data = [];
-        $data['bookinglist'] = $bookinglist;
-        $this->load->view('Admin/bookingReport', $data);
-    }
-
-    function serviceCategory() {
         $this->db->order_by('display_index');
         $query = $this->db->get('category');
-        $servicelist = $query->result_array();
-        $data['categories'] = $servicelist;
+        $categorylist = $query->result_array();
+        $data['categorylist'] = $categorylist;
 
-        if (isset($_POST['addCategory'])) {
-            $data = array(
-                "category_name" => $this->input->post("category_name"),
-                "description" => "",
-                "parent_id" => "0",
-                "display_index" => "",
-            );
-            $this->db->insert("category", $data);
-            redirect("Admin/serviceCategory");
-        }
-
-        if (isset($_POST['deleteCategory'])) {
-            $id = $this->input->post("category_id");
-            $this->db->where('id', $id); //set column_name and value in which row need to update
-            $this->db->delete("category");
-            redirect("Admin/serviceCategory");
-        }
-
-        $this->load->view('Admin/categories', $data);
-    }
-
-    function services() {
-        $data = [];
 
 
         if (isset($_POST['deleteService'])) {
             $id = $this->input->post("service_id");
             $this->db->where('id', $id); //set column_name and value in which row need to update
             $this->db->delete("category_items");
-            redirect("Admin/services");
+            redirect("Admin/addmembers");
         }
 
 
         if (isset($_POST['add_data'])) {
 
             $insertArray = array(
+                "name" => $this->input->post("name"),
+                "prefix" => $this->input->post("prefix"),
+                "parent" => $this->input->post("parent"),
+                "position_id" => $this->input->post("position_id"),
                 "category_id" => $this->input->post("category_id"),
-                "service_name" => $this->input->post("service_name"),
-                "description" => $this->input->post("description"),
+                "state" => $this->input->post("state"),
+                "district" => $this->input->post("district"),
+                "city" => $this->input->post("city"),
+                "mobile_no" => $this->input->post("mobile_no"),
                 "image" => "",
-                "display_index" => $this->input->post("display_index")
+                "address" => $this->input->post("address")
             );
-            $this->db->insert("category_items", $insertArray);
+            $this->db->insert("members", $insertArray);
             $insert_id = $this->db->insert_id();
             $realfilename = $this->input->post("file_real_name");
             if ($realfilename) {
-                $config['upload_path'] = 'assets/serviceimage';
+                $config['upload_path'] = 'assets/memberphotos';
                 $config['allowed_types'] = '*';
                 $tempfilename = rand(10000, 1000000);
-                $tempfilename = "" . $tempfilename . $tableid;
+                $tempfilename = "" . $tempfilename . $insert_id;
                 $ext2 = explode('.', $_FILES['file']['name']);
                 $ext3 = strtolower(end($ext2));
                 $ext22 = explode('.', $tempfilename);
@@ -349,10 +208,10 @@ class Admin extends CI_Controller {
 
                     $this->db->set('image', $file_newname);
                     $this->db->where('id', $insert_id); //set column_name and value in which row need to update
-                    $this->db->update("category_items"); //
+                    $this->db->update("members"); //
                 }
             }
-            redirect("Admin/services");
+            redirect("Admin/addmembers");
         }
 
         if (isset($_POST['update_data'])) {
@@ -392,24 +251,54 @@ class Admin extends CI_Controller {
                     $this->db->update("category_items"); //
                 }
             }
-            redirect("Admin/services");
+            redirect("Admin/addmembers");
         }
 
-        $this->load->view('Admin/services', $data);
+        $this->load->view('Admin/member', $data);
     }
 
-    function customers() {
+    function positions() {
         if ($this->user_id == 0) {
             redirect('Admin/login');
         }
-
-        $this->db->order_by('id desc');
-        $query = $this->db->get('app_user');
-        $userlist = $query->result_array();
+        $this->db->order_by('display_index');
+        $query = $this->db->get('category_position');
+        $positiondata = $query->result_array();
+        if (isset($_POST['add_data'])) {
+            $insertArray = array(
+                "position_name" => $this->input->post("position_name"),
+                "description" => "",
+                "display_index" => $this->input->post("display_index")
+            );
+            $this->db->insert("category_position", $insertArray);
+            redirect("Admin/positions");
+        }
 
         $data = [];
-        $data['userdata'] = $userlist;
-        $this->load->view('Admin/userlist', $data);
+        $data['positiondata'] = $positiondata;
+        $this->load->view('Admin/position', $data);
+    }
+
+    function positionsCategory() {
+        if ($this->user_id == 0) {
+            redirect('Admin/login');
+        }
+        $this->db->order_by('display_index');
+        $query = $this->db->get('category');
+        $positiondata = $query->result_array();
+        if (isset($_POST['add_data'])) {
+            $insertArray = array(
+                "category_name" => $this->input->post("category_name"),
+                "description" => "",
+                "display_index" => $this->input->post("display_index")
+            );
+            $this->db->insert("category", $insertArray);
+            redirect("Admin/positionsCategory");
+        }
+
+        $data = [];
+        $data['positiondata'] = $positiondata;
+        $this->load->view('Admin/positionsCategory', $data);
     }
 
     function sliderImages() {
@@ -510,6 +399,56 @@ class Admin extends CI_Controller {
             redirect("Admin/gallaryImages");
         }
         $this->load->view('Admin/sliderimages', $data);
+    }
+
+    function insertTempData() {
+        $paddata = [
+            'आंध्रप्रदेश',
+            'अरुणाचल प्रदेश',
+            'असम',
+            'बिहार',
+            'छत्तीसगढ़',
+            'गोवा',
+            'गुजरात',
+            'हरियाणा',
+            'हिमाचल प्रदेश',
+            'झारखण्ड',
+            'कर्नाटक',
+            'केरल',
+            'मध्यप्रदेश',
+            'महाराष्ट्र',
+            'मणिपुर',
+            'मेघालय',
+            'मिजोरम',
+            'नागालैंड',
+            'उड़ीसा',
+            'पंजाब',
+            'राजस्थान',
+            'सिक्किम',
+            'तमिलनाडु',
+            'तेलांगना',
+            'त्रिपुरा',
+            'उत्तरप्रदेश',
+            'उत्तराखंड',
+            'पश्चिम बंगाल',
+            'केंद्रशासित क्षेत्र',
+            'अंडमान और निकोबार',
+            'चंड़ीगढ़',
+            'दादर और नागर हवेली',
+            'दमन एवं द्वीप',
+            'लक्ष्यद्वीप',
+            'दिल्ली',
+            'पांडिचेरी',
+            'जम्मू और कश्मीर', 12
+        ];
+        foreach ($paddata as $key => $value) {
+            $insertArray = array(
+                "name	" => $value,
+                "display_index" => "",
+                "status" => "0"
+            );
+//            $this->db->insert("configuration_state", $insertArray);
+        }
     }
 
 }

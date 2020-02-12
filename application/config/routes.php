@@ -51,24 +51,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-@\=';
 
-$route['default_controller'] = 'Shop';
-$route['404_override'] = 'Shop/error404';
+$route['default_controller'] = 'Admin';
+$route['404_override'] = 'Admin/error_404';
 $route['translate_uri_dashes'] = FALSE;
-$route['contact-us'] = 'Shop/contactus';
-$route['appointment'] = 'Shop/appointment';
-$route['subscribe'] = 'Shop/subscribe';
-$route['aboutus'] = 'Shop/aboutus';
-$route['services'] = 'Shop/services';
-$route['academy'] = 'Shop/academy';
-$route['portfolio'] = 'Shop/portfolio';
-$route['stsleague'] = 'Shop/STSLeague';
-$route['reviews'] = 'Shop/reviews';
-$route['faqs'] = 'Shop/faqs';
-$route['sitemap\.xml'] = "Sitemap/index";
-$route['sitemap'] = "Sitemap/general";
-$route['admin'] = "Shop/locallogin";
 
-$route['privacypolicy'] = 'Shop/privacypolicy';
 
 
 
