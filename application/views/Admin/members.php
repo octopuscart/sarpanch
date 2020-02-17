@@ -42,19 +42,19 @@ $this->load->view('layout/headerAdmin');
         color: #FFEB3B;
     }
     .memberslist {
-    text-align: center;
-    border: 1px solid #E0E0E0;
-    height: 500px;
-}
+        text-align: center;
+        border: 1px solid #E0E0E0;
+        height: 500px;
+    }
 </style>
 <section class="sub-bnr" data-stellar-background-ratio="0.5" >
     <div class="position-center-center">
         <div class="container">
             <h4>
-                <?php echo $title;?> संगठन 
-                <a href="<?php echo site_url("Admin/addmembers")?>" class="btn btn-success pull-right"><i class="fa fa-plus"></i> सदस्य जोड़े </a>
+                <?php echo $title; ?> संगठन 
+                <a href="<?php echo site_url("Admin/addmembers") ?>" class="btn btn-success pull-right"><i class="fa fa-plus"></i> सदस्य जोड़े </a>
             </h4>
-            
+
 
         </div>
     </div>
@@ -65,7 +65,7 @@ $this->load->view('layout/headerAdmin');
     <!-- begin breadcrumb -->
 
 
-   
+
     <div class="panel panel-inverse">
 
         <div class="panel-body">
@@ -93,7 +93,12 @@ $this->load->view('layout/headerAdmin');
                                     <?php echo $value['state']; ?>
                                 </p>
                                 <h5><i class="fa fa-phone"></i> <?php echo $value['mobile_no']; ?></h5>
+                                <form action="#" method="post">
+                                    <button class="btn btn-danger btn-sm" name="delete_data" type="submit">Delete</button>
+                                    <input type="hidden" name="member_id" value="<?php echo $value['id']; ?>"/>
+                                </form>
                             </div>
+
                         </div>
                         <?php
                     }

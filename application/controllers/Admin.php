@@ -134,13 +134,19 @@ class Admin extends CI_Controller {
         $memberslist = $query->result_array();
         $data['memberslist'] = $memberslist;
         $this->load->view('Admin/members', $data);
+        if (isset($_POST['delete_data'])) {
+            $memberid = $this->input->post("member_id");
+            $this->db->where('id', $memberid);
+            $this->db->delete('members');
+             redirect("Admin/members/$category_id");
+        }
     }
 
     function addmembers() {
-        if ($this->user_id==0) {
+        if ($this->user_id == 0) {
             redirect('Admin/members/5');
         }
-     
+
         $data = [];
         $this->db->order_by('display_index');
         $query = $this->db->get('configuration_state');
