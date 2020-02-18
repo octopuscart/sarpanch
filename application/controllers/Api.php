@@ -254,6 +254,36 @@ class Api extends REST_Controller {
         $this->response($galleryList);
     }
 
+    function translateImage_post() {
+        
+    }
+
+    function translateImage_get() {
+        $pyfilepath = APPPATH . "../assets/pythontest/";
+        $inputfile = $pyfilepath . "input/images.jpg";
+        $x1 = 30;
+        $y1 = 10;
+        $x2 = 524;
+        $y2 = 10;
+        $x3 = 4;
+        $y3 = 550;
+        $x4 = 550;
+        $y4 = 550;
+
+        $ox1 = 0;
+        $oy1 = 554;
+        $ox2 = 0;
+        $oy2 = 554;
+        $ox3 = 0;
+        $oy3 = 554;
+        $ox4 = 554;
+        $oy4 = 554;
+        echo $commandr = "test.py  $x1 $y1 $x2 $y2 $x3 $y3 $x4 $y4 $ox1 $oy1 $ox2 $oy2 $ox3 $oy3 $ox4 $oy4 $inputfile";
+        $command = escapeshellcmd($commandr);
+        $output = shell_exec($command);
+        echo $output;
+    }
+
 }
 
 ?>
