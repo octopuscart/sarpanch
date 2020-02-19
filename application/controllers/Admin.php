@@ -138,7 +138,7 @@ class Admin extends CI_Controller {
             $memberid = $this->input->post("member_id");
             $this->db->where('id', $memberid);
             $this->db->delete('members');
-             redirect("Admin/members/$category_id");
+            redirect("Admin/members/$category_id");
         }
     }
 
@@ -299,6 +299,13 @@ class Admin extends CI_Controller {
                 "display_index" => $this->input->post("display_index")
             );
             $this->db->insert("category", $insertArray);
+            redirect("Admin/positionsCategory");
+        }
+
+        if (isset($_POST['delete_id'])) {
+            $pid = $this->input->post("delete_id");
+            $this->db->where('id', $pid); //set column_name and value in which row need to update
+            $this->db->delete("category");
             redirect("Admin/positionsCategory");
         }
 

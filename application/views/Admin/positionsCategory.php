@@ -75,7 +75,7 @@ $this->load->view('layout/headerAdmin');
 
                         <td>
                             <form class="form-inline" action="#" method="POST">
-                                <input type="hidden" name="user_id" value="<?php echo $value['id']; ?>">
+                                <input type="hidden" name="delete_id" value="<?php echo $value['id']; ?>">
                                 <div class="btn-group" role="group">
                                     <button type="submit" class="btn  btn-default " name="deleteUser"><i class="fa fa-times"></i></button>
                                 </div>

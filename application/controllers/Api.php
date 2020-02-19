@@ -278,7 +278,7 @@ class Api extends REST_Controller {
         $oy3 = 554;
         $ox4 = 554;
         $oy4 = 554;
-        echo $commandr = "./test.py  $x1 $y1 $x2 $y2 $x3 $y3 $x4 $y4 $ox1 $oy1 $ox2 $oy2 $ox3 $oy3 $ox4 $oy4 $inputfile";
+       $commandr = "./test.py  $x1 $y1 $x2 $y2 $x3 $y3 $x4 $y4 $ox1 $oy1 $ox2 $oy2 $ox3 $oy3 $ox4 $oy4 $inputfile";
         $command = escapeshellcmd($commandr);
         $output = shell_exec($command);
         echo $output;
