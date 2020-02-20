@@ -20,10 +20,11 @@ class Admin extends CI_Controller {
     }
 
     public function index() {
-        if ($this->user_id) {
-            redirect('Admin/members/5');
-        }
-        redirect('Admin/login');
+       
+            redirect('Admin/members/56');
+        
+
+        
     }
 
     //login page
