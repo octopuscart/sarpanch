@@ -135,7 +135,7 @@ class Admin extends CI_Controller {
         $memberslist = $query->result_array();
         $data['memberslist'] = $memberslist;
          $data["admin"] = "0";
-        if ($this->user_id == 0) {
+        if ($this->user_id) {
             $data["admin"] = "1";
         }
         
