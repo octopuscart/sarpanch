@@ -134,6 +134,11 @@ class Admin extends CI_Controller {
         $query = $this->db->query($queryst);
         $memberslist = $query->result_array();
         $data['memberslist'] = $memberslist;
+         $data["admin"] = "0";
+        if ($this->user_id == 0) {
+            $data["admin"] = "1";
+        }
+        
         $this->load->view('Admin/members', $data);
         if (isset($_POST['delete_data'])) {
             $memberid = $this->input->post("member_id");

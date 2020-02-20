@@ -93,10 +93,16 @@ $this->load->view('layout/headerAdmin');
                                     <?php echo $value['state']; ?>
                                 </p>
                                 <h5><i class="fa fa-phone"></i> <?php echo $value['mobile_no']; ?></h5>
-                                <form action="#" method="post">
-                                    <button class="btn btn-danger btn-sm" name="delete_data" type="submit">Delete</button>
-                                    <input type="hidden" name="member_id" value="<?php echo $value['id']; ?>"/>
-                                </form>
+                                <?php
+                                if ($admin == '1') {
+                                    ?>
+                                    <form action="#" method="post">
+                                        <button class="btn btn-danger btn-sm" name="delete_data" type="submit">Delete</button>
+                                        <input type="hidden" name="member_id" value="<?php echo $value['id']; ?>"/>
+                                    </form>
+                                    <?php
+                                }
+                                ?>
                             </div>
 
                         </div>
