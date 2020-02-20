@@ -52,7 +52,13 @@ $this->load->view('layout/headerAdmin');
         <div class="container">
             <h4>
                 <?php echo $title; ?> संगठन 
-                <a href="<?php echo site_url("Admin/addmembers") ?>" class="btn btn-success pull-right"><i class="fa fa-plus"></i> सदस्य जोड़े </a>
+                <?php
+                if ($admin == '1') {
+                    ?>
+                    <a href="<?php echo site_url("Admin/addmembers") ?>" class="btn btn-success pull-right"><i class="fa fa-plus"></i> सदस्य जोड़े </a>
+                    <?php
+                }
+                ?>
             </h4>
 
 
